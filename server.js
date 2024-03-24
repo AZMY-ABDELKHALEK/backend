@@ -8,6 +8,7 @@ const jobRequestRoutes = require("./routes/jobRequests");
 
 const app = express();
 
+//Middleware bodyparser
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
@@ -15,6 +16,11 @@ app.use("/api/profiles", profileRoutes);
 app.use("/api/qualifications", qualificationRoutes);
 app.use("/api/job-requests", jobRequestRoutes);
 
+app.use((req,res)=>{
+  res.send("API is running...")
+})
+
+//Connect our DB
 mongoose
   .connect(process.env.DB_URL, {
     useNewUrlParser: true,
